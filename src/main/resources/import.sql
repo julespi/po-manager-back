@@ -1,0 +1,1 @@
+INSERT INTO suppliers (name, address, cuit) VALUES('Nike', 'Calle 7, 456', 2012345679);
