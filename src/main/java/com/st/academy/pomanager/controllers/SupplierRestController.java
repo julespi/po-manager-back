@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.st.academy.pomanager.models.entities.Supplier;
 import com.st.academy.pomanager.models.services.SupplierService;
 
 @RestController
 @RequestMapping("/api/suppliers")
-public class SupplierRestController {
+public class SupplierRestController implements CrudRestController<Supplier>{
     
     @Autowired
     private SupplierService supplierService;
@@ -34,6 +35,12 @@ public class SupplierRestController {
         response.put("message", "Exist");
         response.put("payload", supplierService.findById(id));
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> create(Supplier t) {
+	System.out.println("/api/suppliers/create");
+	return null;
     }
 
 }
