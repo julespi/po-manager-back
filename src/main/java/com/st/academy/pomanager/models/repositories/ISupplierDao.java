@@ -1,4 +1,4 @@
-package com.st.academy.pomanager.models.daos;
+package com.st.academy.pomanager.models.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

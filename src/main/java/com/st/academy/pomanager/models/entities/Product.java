@@ -9,52 +9,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "producto")
-public class Product {
+public class Product extends BasePersistanceEntity {
 
-    @Getter
-    @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
-    private Long id;
-
-    @Getter
-    @Setter
     @Column(name = "descripcion")
     private String description;
 
-    @Getter
-    @Setter
     @Column(name = "precio_unitario")
     private Long unitPrice;
 
-    @Getter
-    @Setter
     @Column(name = "unidades_stock")
     private int stock;
 
-    @Getter
-    @Setter
     @Column(name = "unidades_reposicion")
     private int restock;
 
-    @Getter
-    @Setter
     @Column(name = "flg_discontinuo")
     private boolean discontinuous;
 
-    @Getter
-    @Setter
-    @JsonManagedReference
+    @JsonIgnoreProperties({"id", "products"})
     @ManyToOne
     @JoinColumn(name = "id_categoria", nullable = false)
     private Category category;
+
+    @JsonIgnoreProperties({"products", "categories"})
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor", nullable = false)
+    private Supplier supplier;
 
 }

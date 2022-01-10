@@ -22,14 +22,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "categoria")
-public class Category {
-
-    @Getter
-    @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria")
-    private Long id;
+public class Category extends BasePersistanceEntity{
 
     @Getter
     @Setter

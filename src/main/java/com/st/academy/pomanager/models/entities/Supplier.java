@@ -9,23 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name="proveedor")
-public class Supplier {
-    
-    @Getter
-    @Setter
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_proveedor")
-    private Long id;
+public class Supplier extends BasePersistanceEntity{
     
     @Getter
     @Setter
@@ -44,12 +38,13 @@ public class Supplier {
     
     @Getter
     @Setter
-    @JsonManagedReference
+    @JsonIgnoreProperties({ "id", "suppliers" })
     @ManyToMany(mappedBy = "suppliers")
     private Set<Category> categories = new HashSet<>();
     
-    /*@Getter
+    @Getter
     @Setter
-    @Column(nullable = false)
-    private Integer cuit;*/
+    @JsonIgnoreProperties({ "supplier" })
+    @OneToMany(mappedBy = "supplier")
+    private Set<Product> products = new HashSet<>();;
 }

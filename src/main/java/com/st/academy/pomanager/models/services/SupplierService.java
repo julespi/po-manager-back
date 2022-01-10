@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.st.academy.pomanager.models.daos.ISupplierDao;
+import com.st.academy.pomanager.models.repositories.ISupplierDao;
 import com.st.academy.pomanager.models.entities.Supplier;
 
 @Service
