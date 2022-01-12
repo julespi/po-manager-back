@@ -18,33 +18,24 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name="proveedor")
 public class Supplier extends BasePersistanceEntity{
     
-    @Getter
-    @Setter
+
     @Column(name = "empresa")
     private String company;
-    
-    @Getter
-    @Setter
+
     @Column(name = "contacto")
     private String contact;
-    
-    @Getter
-    @Setter
+
     @Column(name = "direccion")
     private String address;
-    
-    @Getter
-    @Setter
-    @JsonIgnoreProperties({ "id", "suppliers" })
+
     @ManyToMany(mappedBy = "suppliers")
     private Set<Category> categories = new HashSet<>();
-    
-    @Getter
-    @Setter
-    @JsonIgnoreProperties({ "supplier" })
+
     @OneToMany(mappedBy = "supplier")
     private Set<Product> products = new HashSet<>();;
 }

@@ -21,25 +21,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "categoria")
 public class Category extends BasePersistanceEntity{
 
-    @Getter
-    @Setter
     @Column(name = "descripcion")
     private String description;
 
-    @Getter
-    @Setter
-    @JsonBackReference
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(name = "proveedor_categoria", joinColumns = {
 	    @JoinColumn(name = "id_categoria") }, inverseJoinColumns = { @JoinColumn(name = "id_proveedor") })
     private Set<Supplier> suppliers = new HashSet<>();
 
-    @Getter
-    @Setter
-    @JsonBackReference
     @OneToMany(mappedBy = "category")
     private Set<Product> products = new HashSet<>();;
 }
