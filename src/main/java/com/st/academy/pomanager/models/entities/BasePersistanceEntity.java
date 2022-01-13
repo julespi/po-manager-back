@@ -18,7 +18,8 @@ public abstract class BasePersistanceEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "creado")
+    @Column(name = "creado") //, nullable = false, updatable = false)
+    //TODO al poner updateable en false, y hacer un save, el objeto resultante no posee created pero si en la DB
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date created;

@@ -2,6 +2,7 @@ package com.st.academy.pomanager.controllers;
 
 import com.st.academy.pomanager.utils.DBException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,16 @@ public class GlobalControllerExceptionHandler {
             errors.add(error.getDefaultMessage());
         });
         response.put("message", errors);
+        response.put("payload", null);
+        return response;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseBody
+    public Map<String, Object> handleEmptyBodyException(HttpMessageNotReadableException ex) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", ex.getMessage());
         response.put("payload", null);
         return response;
     }

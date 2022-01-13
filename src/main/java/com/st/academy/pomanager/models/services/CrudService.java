@@ -1,12 +1,15 @@
 package com.st.academy.pomanager.models.services;
 
+import com.st.academy.pomanager.utils.DBException;
+
 import java.util.List;
 
-public interface CrudService<T> {
+public interface CrudService<T, ID> {
     
-    public List<T> findAll();
-    public T save(T t);
-    public void delete(Long id);
-    public T findById(Long id);
+    List<T> findAll();
+    T save(T t);
+    void delete(ID id);
+    T findById(ID id);
+    T update(T t, ID id);
 
 }

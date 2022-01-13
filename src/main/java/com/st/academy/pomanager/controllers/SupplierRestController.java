@@ -14,33 +14,36 @@ import com.st.academy.pomanager.models.services.SupplierService;
 
 @RestController
 @RequestMapping("/api/suppliers")
-public class SupplierRestController implements CrudRestController<Supplier>{
-    
+public class SupplierRestController implements CrudRestController<Supplier> {
+
     @Autowired
     private SupplierService supplierService;
-    
-    @GetMapping("")
-    public ResponseEntity<Map<String, Object>> list(){
-	Map<String, Object> response = new HashMap<>();
+
+    @Override
+    public ResponseEntity<Map<String, Object>> create(Supplier t) {
+        System.out.println("/api/suppliers/create");
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Map<String, Object>> findAll() {
+        Map<String, Object> response = new HashMap<>();
         response.put("message", "Exist");
         response.put("payload", supplierService.findAll());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> getById(@PathVariable Long id){
-	Map<String, Object> response = new HashMap<>();
+
+    @Override
+    public ResponseEntity<Map<String, Object>> findById(Long id) {
+        Map<String, Object> response = new HashMap<>();
         response.put("message", "Exist");
         response.put("payload", supplierService.findById(id));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> create(Supplier t) {
-	System.out.println("/api/suppliers/create");
-	return null;
+    public ResponseEntity<Map<String, Object>> update(Supplier supplier, Long id) {
+        return null;
     }
-
-
 
 }
