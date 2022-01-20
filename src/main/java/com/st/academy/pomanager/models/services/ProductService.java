@@ -56,4 +56,8 @@ public class ProductService implements CrudService<Product, Long> {
         product.setCreated(oldProduct.getCreated());
         return iProductDao.save(product);
     }
+
+    public List<Product> findByDescriptionContaining(String description) {
+        return iProductDao.findByDescriptionContaining(description);
+    }
 }

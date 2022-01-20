@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.st.academy.pomanager.models.services.ProductService;
 
-
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 @RequestMapping("/api/products")
 public class ProductRestController implements CrudRestController<ProductDTO> {
@@ -64,6 +64,18 @@ public class ProductRestController implements CrudRestController<ProductDTO> {
         Product savedProduct = productService.save(modelMapper.map(productDTO, Product.class));
         response.put("payload", modelMapper.map(savedProduct, ProductDTO.class));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Map<String, Object>> findByDescription(@RequestParam("description") String description) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Exist");
+        List<ProductDTO> productDTOs = productService.findByDescriptionContaining(description)
+                .stream()
+                .map(product -> modelMapper.map(product, ProductDTO.class))
+                .collect(Collectors.toList());
+        response.put("payload", productDTOs);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
