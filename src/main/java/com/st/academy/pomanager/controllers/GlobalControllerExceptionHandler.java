@@ -4,6 +4,7 @@ import com.st.academy.pomanager.utils.DBException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,9 @@ public class GlobalControllerExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, Object> response = new HashMap<>();
-        List<String> errors = new ArrayList<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            errors.add(error.getDefaultMessage());
+        Map<String, String> errors = new HashMap<>();
+        ex.getFieldErrors().forEach((error) -> {
+            errors.put(error.getField(),error.getDefaultMessage());
         });
         response.put("message", errors);
         response.put("payload", null);

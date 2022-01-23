@@ -22,5 +22,5 @@ public class SupplierDTO extends BasePersistanceDTO{
     private String address;
 
     @NotNull(message = "categoryId is required")
-    private Integer categoryId;
+    private Long categoryId;
 }

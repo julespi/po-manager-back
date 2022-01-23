@@ -21,4 +21,8 @@ public class OrderDetail extends BasePersistanceEntity {
     @Column(name = "precio_venta")
     private Integer sale_price;
 
+    @ManyToOne
+    @JoinColumn(name = "id_orden", nullable = false)
+    private Order order;
+
 }

@@ -37,5 +37,5 @@ public class Supplier extends BasePersistanceEntity{
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "supplier")
-    private Set<Product> products = new HashSet<>();;
+    private Set<Product> products = new HashSet<>();
 }

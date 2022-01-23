@@ -3,6 +3,7 @@ package com.st.academy.pomanager.models.entities;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -31,10 +32,10 @@ public class ProductDTO extends BasePersistanceDTO{
     private boolean discontinuous;
 
     @NotNull(message = "categoryId is required")
-    private Integer categoryId;
+    private Long categoryId;
 
     @NotNull(message = "supplierId is required")
-    private Integer supplierId;
+    private Long supplierId;
 
-
+    private String imageUrl;
 }

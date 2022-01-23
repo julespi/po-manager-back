@@ -38,4 +38,7 @@ public class Product extends BasePersistanceEntity {
     @JoinColumn(name = "id_proveedor", nullable = false)
     private Supplier supplier;
 
+    @Column(name = "url_imagen")
+    private String imageUrl;
+
 }
