@@ -2,7 +2,7 @@ package com.st.academy.pomanager.models.services;
 
 import com.st.academy.pomanager.models.entities.Category;
 import com.st.academy.pomanager.models.repositories.ICategoryDao;
-import com.st.academy.pomanager.utils.DBException;
+import com.st.academy.pomanager.utils.DBNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +31,8 @@ public class CategoryService implements CrudService<Category, Long> {
     }
 
     @Override
-    public Category findById(Long id) throws DBException {
-        return iCategoryDao.findById(id).orElseThrow(() -> new DBException("No category found with id: " + id));
+    public Category findById(Long id) throws DBNotFoundException {
+        return iCategoryDao.findById(id).orElseThrow(() -> new DBNotFoundException("No category found with id: " + id));
     }
 
     @Override

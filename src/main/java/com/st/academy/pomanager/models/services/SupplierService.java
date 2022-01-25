@@ -2,7 +2,7 @@ package com.st.academy.pomanager.models.services;
 
 import java.util.List;
 
-import com.st.academy.pomanager.utils.DBException;
+import com.st.academy.pomanager.utils.DBNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +32,8 @@ public class SupplierService implements CrudService<Supplier, Long> {
     }
 
     @Override
-    public Supplier findById(Long id) throws DBException {
-        return iSupplierDao.findById(id).orElseThrow(() -> new DBException("No supplier found with id: " + id));
+    public Supplier findById(Long id) throws DBNotFoundException {
+        return iSupplierDao.findById(id).orElseThrow(() -> new DBNotFoundException("No supplier found with id: " + id));
     }
 
     @Override

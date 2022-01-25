@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +35,7 @@ public class CategoryRestController implements CrudRestController<CategoryDTO> {
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> findAll() {
+    public ResponseEntity<Map<String, Object>> findAll(int page, int size, String filter) {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Exist");
         List<CategoryDTO> categoriesDTO = categoryService.findAll()

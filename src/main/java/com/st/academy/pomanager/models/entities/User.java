@@ -21,10 +21,10 @@ public class User extends BasePersistanceEntity{
     private String password;
 
     @Column(name = "nombre")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "apellido")
-    private String last_name;
+    private String lastName;
 
     @Column(name = "direccion",nullable = true)
     private String address;

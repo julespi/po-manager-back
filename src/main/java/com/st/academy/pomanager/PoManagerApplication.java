@@ -1,5 +1,6 @@
 package com.st.academy.pomanager;
 
+import com.st.academy.pomanager.models.entities.OrderDTO;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +17,8 @@ public class PoManagerApplication {
 	@Bean
 	public ModelMapper modelMapper(){
 		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+		//modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+
 		return modelMapper;
 	}
 }

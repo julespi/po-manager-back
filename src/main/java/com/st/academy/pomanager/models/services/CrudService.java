@@ -1,7 +1,5 @@
 package com.st.academy.pomanager.models.services;
 
-import com.st.academy.pomanager.utils.DBException;
-
 import java.util.List;
 
 public interface CrudService<T, ID> {

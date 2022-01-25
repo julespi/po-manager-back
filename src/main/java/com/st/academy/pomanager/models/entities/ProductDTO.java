@@ -13,28 +13,28 @@ import javax.validation.constraints.PositiveOrZero;
 @Setter
 public class ProductDTO extends BasePersistanceDTO{
 
-    @NotBlank(message = "Description is required")
+    @NotBlank(message = "Descripcion requerida")
     private String description;
 
-    @NotNull(message = "Unit price is required")
-    @Positive(message = "unitPrice cannot be negative or zero")
+    @NotNull(message = "Precio requerido")
+    @Positive(message = "Precio debe no puede ser negativo o cero")
     private Long unitPrice;
 
-    @NotNull(message = "stock is required")
-    @PositiveOrZero(message = "stock cannot be negative")
+    @NotNull(message = "Stock requerido")
+    @PositiveOrZero(message = "El stock no puede ser negativo")
     private Integer stock;
 
-    @NotNull(message = "restock is required")
-    @PositiveOrZero(message = "restock cannot be negative")
+    @NotNull(message = "Restock requerido")
+    @PositiveOrZero(message = "Restock no puede ser negativo")
     private Integer restock;
 
-    @NotNull(message = "discontinuous is required")
+    @NotNull(message = "Discontinuo requerido")
     private boolean discontinuous;
 
-    @NotNull(message = "categoryId is required")
+    @NotNull(message = "Categoria requerida")
     private Long categoryId;
 
-    @NotNull(message = "supplierId is required")
+    @NotNull(message = "Proveedor requerida")
     private Long supplierId;
 
     private String imageUrl;

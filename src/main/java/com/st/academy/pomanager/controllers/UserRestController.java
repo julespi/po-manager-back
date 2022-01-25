@@ -1,7 +1,10 @@
 package com.st.academy.pomanager.controllers;
 
+import com.st.academy.pomanager.models.entities.Order;
+import com.st.academy.pomanager.models.entities.OrderDTO;
 import com.st.academy.pomanager.models.entities.User;
 import com.st.academy.pomanager.models.entities.UserDTO;
+import com.st.academy.pomanager.models.services.OrderService;
 import com.st.academy.pomanager.models.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +28,9 @@ public class UserRestController implements CrudRestController<UserDTO> {
     private UserService userService;
 
     @Autowired
+    private OrderService orderService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
@@ -32,7 +39,7 @@ public class UserRestController implements CrudRestController<UserDTO> {
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> findAll() {
+    public ResponseEntity<Map<String, Object>> findAll(int page, int size, String filter) {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Exist");
         List<UserDTO> categoriesDTO = userService.findAll()
@@ -64,5 +71,28 @@ public class UserRestController implements CrudRestController<UserDTO> {
         response.put("message", "User successfully loged in");
         response.put("payload", modelMapper.map(logedInUser, UserDTO.class));
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/{id}/orders")
+    public ResponseEntity<Map<String, Object>> getOrdersForUser(
+            @PathVariable Long id,
+            @RequestParam(required = false) String isOpen
+    ){
+        userService.findById(id);
+        List<Order> orders = new ArrayList<>();
+        System.out.println(isOpen);
+        if(isOpen == null){
+            orders = orderService.findAllByClientId(id);
+        }else{
+            orders = orderService.findAllByClientIdAndIsOpen(id, Boolean.parseBoolean(isOpen));
+        }
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Exist");
+        List<OrderDTO> ordersDTO = orders
+                .stream()
+                .map(order -> modelMapper.map(order, OrderDTO.class))
+                .collect(Collectors.toList());
+        response.put("payload", ordersDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

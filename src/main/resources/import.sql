@@ -107,11 +107,11 @@ INSERT INTO producto (
     url_imagen
     )
 VALUES
-    (1,'Notebook Vaio SVN1445210',1,1,1300,5,2,0, NOW(), NOW(), 'https://images.app.goo.gl/MP4MbpkKR78UbyTu5'), -- notebook/sony
+    (1,'Notebook Vaio SVN1445210',1,1,1300,5,2,0, NOW(), NOW(), ''), -- notebook/sony
     (2,'Notebook Vaio SVN1562883',1,1,980,2,3,0, NOW(), NOW(), 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo99E9azHbmljaRv2eURA8L5xd4JyQ6yRY7g&usqp=CAU'), -- notebook/sony
     (3,'Ultrabook Slim Vaio SVUB15551',1,1,1800,1,1,0, NOW(), NOW(), 'https://i.blogs.es/408f1b/detras-1/1366_2000.jpg'), -- notebook/sony
     (4,'Inspiron 14-55312',2,1,540,6,0,0, NOW(), NOW(), 'https://tejarra-media.s3.amazonaws.com/55311/item_XXL_132865270_fac74bcb13aba.jpg'), -- notebook/dell
-    (5,'Latitude 12-24411',2,1,1100,3,0,0, NOW(), NOW(), 'https://www.fullh4rd.com.ar/img/productos/Pics_Prod/notebook-dell-116-latitude-3190-n4120-4gb-128gb-w10h-0.jpg'), -- notebook/dell
+    (5,'Latitude 12-24411',2,1,1100,3,0,0, NOW(), NOW(), ''), -- notebook/dell
     (6,'Chromebook 13KBE04',3,1,880,1,3,0, NOW(), NOW(), 'https://m.media-amazon.com/images/I/81mX-4s+guL._AC_SL1500_.jpg'), -- notebook/samsung
     (7,'Xperia V6',1,2,660,3,1,0, NOW(), NOW(), 'https://m.media-amazon.com/images/I/81ktijeMGJL._AC_SL1500_.jpg'), -- cel/sony
     (8,'Xperia V9',1,2,1200,1,0,0, NOW(), NOW(), 'https://m.media-amazon.com/images/I/71ctZEsl1vL._AC_SL1500_.jpg'), -- cel/sony
@@ -282,8 +282,10 @@ INSERT INTO orden (
     actualizado
     )
 VALUES
-    (1, 1, null, NOW(), true, NOW(), NOW()),
-    (2, 2, 1, null, false, NOW(), NOW());
+    (1, 1, null, NOW(), false, NOW(), NOW()),
+    (2, 2, 1, null, true, NOW(), NOW()),
+    (3, 1, null, null, true, NOW(), NOW()),
+    (4, 1, null, NOW(), false, NOW(), NOW());
 
 
 --
@@ -317,7 +319,11 @@ VALUES
     (1, 1, 1, 1, 123.45, NOW(), NOW()),
     (2, 1, 2, 2, 3254.21, NOW(), NOW()),
     (3, 1, 3, 1, 1588.21, NOW(), NOW()),
-    (4, 2, 5, 3, 54788.21, NOW(), NOW());
+    (4, 2, 5, 3, 54788.21, NOW(), NOW()),
+    (5, 3, 3, 1, 1588.21, NOW(), NOW()),
+    (6, 3, 5, 3, 54788.21, NOW(), NOW()),
+    (7, 4, 3, 1, 1588.21, NOW(), NOW()),
+    (8, 5, 5, 3, 54788.21, NOW(), NOW());
 
 
 

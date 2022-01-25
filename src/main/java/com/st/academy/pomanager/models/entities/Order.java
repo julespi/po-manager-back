@@ -26,18 +26,9 @@ public class Order extends BasePersistanceEntity {
     @Column(name = "fecha_entregada")
     private Date delivered;
 
-    @OneToMany(mappedBy = "order", orphanRemoval = true)
+    @OneToMany(mappedBy = "order", orphanRemoval = true,cascade = CascadeType.PERSIST)
     private Set<OrderDetail> details = new HashSet<>();
 
     @Column(name = "esta_abierta")
     private Boolean isOpen;
-
-    @Transient
-    private Integer detailsQty;
-
-
-    @PostLoad
-    private void onLoad() {
-        this.detailsQty = details.size();
-    }
 }

@@ -1,10 +1,8 @@
 package com.st.academy.pomanager.models.services;
 
-import com.st.academy.pomanager.models.entities.Category;
 import com.st.academy.pomanager.models.entities.User;
-import com.st.academy.pomanager.models.repositories.ICategoryDao;
 import com.st.academy.pomanager.models.repositories.IUserDao;
-import com.st.academy.pomanager.utils.DBException;
+import com.st.academy.pomanager.utils.DBNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +31,8 @@ public class UserService implements CrudService<User, Long> {
     }
 
     @Override
-    public User findById(Long id) throws DBException {
-        return iUserDao.findById(id).orElseThrow(() -> new DBException("No user found with id: " + id));
+    public User findById(Long id) throws DBNotFoundException {
+        return iUserDao.findById(id).orElseThrow(() -> new DBNotFoundException("No user found with id: " + id));
     }
 
     @Override
@@ -46,6 +44,6 @@ public class UserService implements CrudService<User, Long> {
         return iUserDao.findByEmailAndPassword(
                 userToLogin.getEmail(),
                 userToLogin.getPassword()
-        ).orElseThrow(() -> new DBException("Wrong credentials"));
+        ).orElseThrow(() -> new DBNotFoundException("Wrong credentials"));
     }
 }

@@ -34,7 +34,7 @@ public class SupplierRestController implements CrudRestController<SupplierDTO> {
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> findAll() {
+    public ResponseEntity<Map<String, Object>> findAll(int page, int size, String filter) {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Exist");
         List<SupplierDTO> suppliersDTO = supplierService.findAll()

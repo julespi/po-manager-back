@@ -19,10 +19,10 @@ public class OrderDetail extends BasePersistanceEntity {
     private Integer quantity;
 
     @Column(name = "precio_venta")
-    private Integer sale_price;
+    private Integer unitSalePrice;
 
     @ManyToOne
-    @JoinColumn(name = "id_orden", nullable = false)
+    @JoinColumn(name = "id_orden")
     private Order order;
 
 }
