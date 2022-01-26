@@ -18,4 +18,6 @@ public abstract class BasePersistanceDTO {
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private Date updated;
 
+    private Boolean active;
+
 }

@@ -16,11 +16,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Getter
 @Setter
 @Table(name="proveedor")
+@SQLDelete(sql = "UPDATE proveedor SET activo = false WHERE id=?")
+@Where(clause = "activo=true")
 public class Supplier extends BasePersistanceEntity{
     
 

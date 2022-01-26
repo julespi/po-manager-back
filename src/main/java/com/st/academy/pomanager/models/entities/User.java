@@ -2,6 +2,8 @@ package com.st.academy.pomanager.models.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,6 +13,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name="usuario")
+@SQLDelete(sql = "UPDATE usuario SET activo = false WHERE id=?")
+@Where(clause = "activo=true")
 public class User extends BasePersistanceEntity{
     
 

@@ -3,7 +3,9 @@ package com.st.academy.pomanager.models.entities;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,6 +30,9 @@ public abstract class BasePersistanceEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Date updated;
+
+    @Column(name = "activo")
+    private Boolean active = Boolean.TRUE;
 
     /*@PrePersist
     protected void onCreate() {

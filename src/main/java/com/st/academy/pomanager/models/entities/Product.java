@@ -8,11 +8,15 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "producto")
+@SQLDelete(sql = "UPDATE producto SET activo = false WHERE id=?")
+@Where(clause = "activo=true")
 public class Product extends BasePersistanceEntity {
 
     @Column(name = "descripcion")

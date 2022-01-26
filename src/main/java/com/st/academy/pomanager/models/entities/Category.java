@@ -19,11 +19,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "categoria")
+@SQLDelete(sql = "UPDATE categoria SET activo = false WHERE id=?")
+@Where(clause = "activo=true")
 public class Category extends BasePersistanceEntity{
 
     @Column(name = "descripcion")

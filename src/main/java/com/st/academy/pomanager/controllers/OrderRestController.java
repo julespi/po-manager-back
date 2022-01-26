@@ -1,6 +1,7 @@
 package com.st.academy.pomanager.controllers;
 
 import com.st.academy.pomanager.models.entities.*;
+import com.st.academy.pomanager.models.services.OrderDetailService;
 import com.st.academy.pomanager.models.services.OrderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class OrderRestController implements CrudRestController<OrderDTO> {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -55,5 +59,15 @@ public class OrderRestController implements CrudRestController<OrderDTO> {
     @Override
     public ResponseEntity<Map<String, Object>> update(OrderDTO supplierDTO, Long id) {
         return null;
+    }
+
+
+    @DeleteMapping("/{id}/detail")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        orderDetailService.delete(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Deletion successfull");
+        response.put("payload", null);
+        return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
 }

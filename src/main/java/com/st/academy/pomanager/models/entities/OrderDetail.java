@@ -2,6 +2,8 @@ package com.st.academy.pomanager.models.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -9,6 +11,8 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "detalle_orden")
+@SQLDelete(sql = "UPDATE detalle_orden SET activo = false WHERE id=?")
+@Where(clause = "activo=true")
 public class OrderDetail extends BasePersistanceEntity {
 
     @ManyToOne

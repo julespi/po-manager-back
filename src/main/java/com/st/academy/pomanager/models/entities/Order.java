@@ -3,6 +3,8 @@ package com.st.academy.pomanager.models.entities;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "orden")
+@SQLDelete(sql = "UPDATE orden SET activo = false WHERE id=?")
+@Where(clause = "activo=true")
 public class Order extends BasePersistanceEntity {
 
     @ManyToOne

@@ -38,6 +38,7 @@ public class OrderService implements CrudService<Order, Long> {
 
     @Override
     public void delete(Long id) {
+        iOrderDao.findById(id).orElseThrow(() -> new DBNotFoundException("No order found with id: " + id));
         iOrderDao.deleteById(id);
 
     }
