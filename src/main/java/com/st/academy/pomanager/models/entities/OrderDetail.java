@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Where(clause = "activo=true")
 public class OrderDetail extends BasePersistanceEntity {
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_producto", nullable = false)
     private Product product;
 
