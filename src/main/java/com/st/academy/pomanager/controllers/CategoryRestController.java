@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://po-manager-front.herokuapp.com"})
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryRestController implements CrudRestController<CategoryDTO> {

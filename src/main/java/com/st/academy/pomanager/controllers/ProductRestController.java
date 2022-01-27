@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.st.academy.pomanager.models.services.ProductService;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://po-manager-front.herokuapp.com"})
 @RestController
 @RequestMapping("/api/products")
 public class ProductRestController implements CrudRestController<ProductDTO> {

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://po-manager-front.herokuapp.com"})
 @RestController
 @RequestMapping("/api/orders")
 public class OrderRestController implements CrudRestController<OrderDTO> {

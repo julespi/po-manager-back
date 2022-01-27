@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.st.academy.pomanager.models.entities.Supplier;
 import com.st.academy.pomanager.models.services.SupplierService;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://po-manager-front.herokuapp.com"})
 @RestController
 @RequestMapping("/api/suppliers")
 public class SupplierRestController implements CrudRestController<SupplierDTO> {

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://po-manager-front.herokuapp.com"})
 @RestController
 @RequestMapping("/api/users")
 public class UserRestController implements CrudRestController<UserDTO> {
@@ -79,8 +79,7 @@ public class UserRestController implements CrudRestController<UserDTO> {
             @RequestParam(required = false) String isOpen
     ){
         userService.findById(id);
-        List<Order> orders = new ArrayList<>();
-        System.out.println(isOpen);
+        List<Order> orders;
         if(isOpen == null){
             orders = orderService.findAllByClientId(id);
         }else{
@@ -92,7 +91,6 @@ public class UserRestController implements CrudRestController<UserDTO> {
                 .stream()
                 .map(order -> modelMapper.map(order, OrderDTO.class))
                 .collect(Collectors.toList());
-        System.out.println(ordersDTO.get(0).getDetails().size());
         response.put("payload", ordersDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
