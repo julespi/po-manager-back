@@ -92,7 +92,7 @@ public class UserRestController implements CrudRestController<UserDTO> {
                 .stream()
                 .map(order -> modelMapper.map(order, OrderDTO.class))
                 .collect(Collectors.toList());
-        System.out.println(ordersDTO.size());
+        System.out.println(ordersDTO.get(0).getDetails().size());
         response.put("payload", ordersDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
