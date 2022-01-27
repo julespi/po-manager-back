@@ -1,5 +1,6 @@
 package com.st.academy.pomanager.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -25,6 +26,7 @@ public class OrderDetail extends BasePersistanceEntity {
     @Column(name = "precio_venta")
     private Integer unitSalePrice;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_orden")
     private Order order;

@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -35,9 +36,11 @@ public class Category extends BasePersistanceEntity{
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(name = "proveedor_categoria", joinColumns = {
-	    @JoinColumn(name = "id_categoria") }, inverseJoinColumns = { @JoinColumn(name = "id_proveedor") })
+            @JoinColumn(name = "id_categoria") }, inverseJoinColumns = { @JoinColumn(name = "id_proveedor") })
+    @JsonIgnore
     private Set<Supplier> suppliers = new HashSet<>();
 
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private Set<Product> products = new HashSet<>();;
 }

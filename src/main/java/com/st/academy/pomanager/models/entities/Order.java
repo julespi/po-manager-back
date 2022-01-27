@@ -1,5 +1,6 @@
 package com.st.academy.pomanager.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,7 +31,8 @@ public class Order extends BasePersistanceEntity {
     @Column(name = "fecha_entregada")
     private Date delivered;
 
-    @OneToMany(mappedBy = "order", orphanRemoval = true,cascade = CascadeType.PERSIST)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "order", orphanRemoval = true)
     private Set<OrderDetail> details = new HashSet<>();
 
     @Column(name = "esta_abierta")

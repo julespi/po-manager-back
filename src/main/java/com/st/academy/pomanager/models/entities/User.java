@@ -1,5 +1,6 @@
 package com.st.academy.pomanager.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -37,10 +38,12 @@ public class User extends BasePersistanceEntity{
     @Column(name = "rol")
     private UserRole role;
 
+    @JsonIgnore
     @ManyToOne(optional=true, fetch=FetchType.LAZY)
     @JoinColumn(name="administrador")
     private User manager;
 
-    @OneToMany(mappedBy = "manager")
-    private Set<User> employees = new HashSet<>();;
+    @JsonIgnore
+    @OneToMany(mappedBy = "manager",fetch = FetchType.LAZY)
+    private Set<User> employees = new HashSet<>();
 }

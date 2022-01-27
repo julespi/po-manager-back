@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Getter;
@@ -38,8 +39,10 @@ public class Supplier extends BasePersistanceEntity{
     private String address;
 
     @ManyToMany(mappedBy = "suppliers")
+    @JsonIgnore
     private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "supplier")
+    @JsonIgnore
     private Set<Product> products = new HashSet<>();
 }

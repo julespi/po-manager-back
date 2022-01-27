@@ -50,7 +50,9 @@ public class OrderService implements CrudService<Order, Long> {
 
     @Override
     public Order update(Order order, Long id) {
-        return null;
+        Order oldOrder = this.findById(id);
+        order.setId(id);
+        return iOrderDao.save(order);
     }
 
     public List<Order> findAllByClientId(Long clientId) {

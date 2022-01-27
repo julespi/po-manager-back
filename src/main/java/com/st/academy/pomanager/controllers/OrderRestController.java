@@ -57,8 +57,12 @@ public class OrderRestController implements CrudRestController<OrderDTO> {
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> update(OrderDTO supplierDTO, Long id) {
-        return null;
+    public ResponseEntity<Map<String, Object>> update(OrderDTO orderDTO, Long id) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Exist");
+        Order order = modelMapper.map(orderDTO, Order.class);
+        response.put("payload", orderService.update(order,id));
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
