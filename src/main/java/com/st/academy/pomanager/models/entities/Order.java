@@ -37,4 +37,8 @@ public class Order extends BasePersistanceEntity {
 
     @Column(name = "esta_abierta")
     private Boolean isOpen;
+
+    public void addDetail(OrderDetail detail){
+        this.details.add(detail);
+    }
 }

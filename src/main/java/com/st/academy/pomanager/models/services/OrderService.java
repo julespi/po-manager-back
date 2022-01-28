@@ -2,6 +2,8 @@ package com.st.academy.pomanager.models.services;
 
 import com.st.academy.pomanager.models.entities.Order;
 import com.st.academy.pomanager.models.entities.OrderDetail;
+import com.st.academy.pomanager.models.entities.OrderDetailDTO;
+import com.st.academy.pomanager.models.entities.User;
 import com.st.academy.pomanager.models.repositories.IOrderDao;
 import com.st.academy.pomanager.models.repositories.IOrderDetailDao;
 import com.st.academy.pomanager.utils.DBNotFoundException;
@@ -33,6 +35,7 @@ public class OrderService implements CrudService<Order, Long> {
         for (OrderDetail detail: order.getDetails()) { //para el back reference
             detail.setOrder(order);
         }
+        order.setActive(true);
         return iOrderDao.save(order);
     }
 
@@ -61,5 +64,28 @@ public class OrderService implements CrudService<Order, Long> {
 
     public List<Order> findAllByClientIdAndIsOpen(Long clientId, boolean isOpen) {
         return iOrderDao.findAllByClientIdAndIsOpen(clientId, isOpen);
+    }
+
+    public Order saveDetailForUser(OrderDetail detail, Long userId) {
+        List<Order> orders = this.findAllByClientIdAndIsOpen(userId,true);
+        Order resultOrder;
+        if(!orders.isEmpty()){
+            resultOrder = orders.get(0);
+            detail.setOrder(resultOrder);
+            detail.setActive(true);
+            resultOrder.addDetail(detail);
+            iOrderDetailDao.save(detail);
+        }else{
+            Order newOrder = new Order();
+            newOrder.addDetail(detail);
+            User user = new User();
+            user.setId(userId);
+            newOrder.setClient(user);
+            newOrder.setIsOpen(true);
+            resultOrder = iOrderDao.save(newOrder);
+            detail.setOrder(resultOrder);
+            iOrderDetailDao.save(detail);
+        }
+        return resultOrder;
     }
 }

@@ -37,6 +37,7 @@ public class ProductService implements CrudService<Product, Long> {
         //TODO esta bien esto como validacion?
         supplierService.findById(product.getSupplier().getId());
         categoryService.findById(product.getCategory().getId());
+        product.setActive(true);
         return iProductDao.save(product);
     }
 

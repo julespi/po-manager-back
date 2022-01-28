@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -73,5 +74,14 @@ public class OrderRestController implements CrudRestController<OrderDTO> {
         response.put("message", "Deletion successfull");
         response.put("payload", null);
         return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/detail/{id}")
+    public ResponseEntity<Map<String, Object>> createDetail(@Valid @RequestBody OrderDetailDTO detailDTO, @PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Order successfully created");
+        Order savedOrder = orderService.saveDetailForUser(modelMapper.map(detailDTO, OrderDetail.class),id);
+        response.put("payload", modelMapper.map(savedOrder, OrderDTO.class));
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }
