@@ -79,9 +79,18 @@ public class OrderRestController implements CrudRestController<OrderDTO> {
     @PostMapping("/detail/{id}")
     public ResponseEntity<Map<String, Object>> createDetail(@Valid @RequestBody OrderDetailDTO detailDTO, @PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "Order successfully created");
+        response.put("message", "Producto agregado correctamente al carrito");
         Order savedOrder = orderService.saveDetailForUser(modelMapper.map(detailDTO, OrderDetail.class),id);
         response.put("payload", modelMapper.map(savedOrder, OrderDTO.class));
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/confirm/{id}")
+    public ResponseEntity<Map<String, Object>> confirm(@Valid @RequestBody OrderDTO orderDTO, @PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Confirmed");
+        Order order = modelMapper.map(orderDTO, Order.class);
+        response.put("payload", orderService.confirm(order,id));
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

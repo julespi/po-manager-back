@@ -1,9 +1,6 @@
 package com.st.academy.pomanager.models.services;
 
-import com.st.academy.pomanager.models.entities.Order;
-import com.st.academy.pomanager.models.entities.OrderDetail;
-import com.st.academy.pomanager.models.entities.OrderDetailDTO;
-import com.st.academy.pomanager.models.entities.User;
+import com.st.academy.pomanager.models.entities.*;
 import com.st.academy.pomanager.models.repositories.IOrderDao;
 import com.st.academy.pomanager.models.repositories.IOrderDetailDao;
 import com.st.academy.pomanager.utils.DBNotFoundException;
@@ -21,6 +18,9 @@ public class OrderService implements CrudService<Order, Long> {
 
     @Autowired
     private IOrderDetailDao iOrderDetailDao;
+
+    @Autowired
+    private ProductService productService;
 
     @Override
     public List<Order> findAll() {
@@ -55,6 +55,23 @@ public class OrderService implements CrudService<Order, Long> {
     public Order update(Order order, Long id) {
         Order oldOrder = this.findById(id);
         order.setId(id);
+        return iOrderDao.save(order);
+    }
+
+    public Order confirm(Order order, Long id) throws DBValidationException{
+        Order oldOrder = this.findById(id);
+        order.setId(id);
+        for(OrderDetail detail:order.getDetails()){
+            Product product = productService.findById(detail.getProduct().getId());
+            if(product.getStock() - detail.getQuantity() < 0){
+                throw new DBValidationException("No hay stock suficiente para el producto: " + product.getDescription());
+            }
+        }
+        for(OrderDetail detail:order.getDetails()){
+            Product product = productService.findById(detail.getProduct().getId());
+            product.setStock(product.getStock() - detail.getQuantity());
+        }
+        order.setIsOpen(false);
         return iOrderDao.save(order);
     }
 
